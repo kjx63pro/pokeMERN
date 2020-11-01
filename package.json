@@ -1,0 +1,18 @@
+{
+  "name": "pokemern",
+  "version": "1.0.0",
+  "description": "MERN pokemon shopping app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-kjx63pro:kjx63pro/pokeMERN.git"
+  },
+  "author": "KJX63PRO",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
