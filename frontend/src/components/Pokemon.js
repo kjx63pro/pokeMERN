@@ -1,20 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import Rating from './Rating';
 
 const Pokemon = ({ pokemon }) => {
   return (
     <Card className='my-3 p-3 rounded'>
-      <a href={`/pokemon/${pokemon._id}`}>
+      <Link to={`/pokemon/${pokemon._id}`}>
         <Card.Img variant='top' src={pokemon.image} />
-      </a>
+      </Link>
 
       <Card.Body>
-        <a href={`/pokemon/${pokemon._id}`}>
+        <Link to={`/pokemon/${pokemon._id}`}>
           <Card.Title as='div' style={{ color: 'black' }}>
             <strong>{pokemon.name}</strong>
           </Card.Title>
-        </a>
+        </Link>
         <Card.Text as='div'>
           <div className='my-3'>
             <Rating
