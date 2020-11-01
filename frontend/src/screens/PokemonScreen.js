@@ -1,11 +1,20 @@
-import React from 'react';
-import pokemons from '../pokemons';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
 
 const PokemonScreen = ({ match }) => {
-  const pokemon = pokemons.find((p) => p._id === match.params.id);
+  const [pokemon, setPokemon] = useState({});
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await axios.get(`/api/pokemons/${match.params.id}`);
+      setPokemon(data);
+    }
+    fetchData();
+  }, []);
+
   return (
     <>
       <Link to='/' className='btn btn-light my-3'>

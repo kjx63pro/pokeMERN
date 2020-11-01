@@ -1,9 +1,18 @@
-import React from 'react';
-import pokemons from '../pokemons';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Row, Col } from 'react-bootstrap';
 import Pokemon from '../components/Pokemon';
 
 const HomeScreen = () => {
+  const [pokemons, setPokemons] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await axios.get('/api/pokemons');
+      setPokemons(data);
+    }
+    fetchData();
+  }, []);
+
   return (
     <>
       <Row>
