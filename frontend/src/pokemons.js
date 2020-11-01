@@ -8,8 +8,8 @@ const pokemons = [
     types: ['Grass', 'Poison'],
     price: 2.99,
     countInStock: 3,
-    rating: 4.8,
-    numReviews: 5,
+    rating: 3.9,
+    numReviews: 12,
   },
   {
     _id: '2',
@@ -20,8 +20,8 @@ const pokemons = [
     types: ['Grass', 'Poison'],
     price: 4.99,
     countInStock: 2,
-    rating: 4.6,
-    numReviews: 5,
+    rating: 2.6,
+    numReviews: 8,
   },
   {
     _id: '3',
@@ -32,8 +32,8 @@ const pokemons = [
     types: ['Grass', 'Poison'],
     price: 7.99,
     countInStock: 1,
-    rating: 4.4,
-    numReviews: 5,
+    rating: 4.1,
+    numReviews: 9,
   },
   {
     _id: '4',
@@ -44,8 +44,8 @@ const pokemons = [
     types: ['Fire'],
     price: 2.99,
     countInStock: 3,
-    rating: 4.8,
-    numReviews: 5,
+    rating: 2.7,
+    numReviews: 14,
   },
   {
     _id: '5',
@@ -56,8 +56,8 @@ const pokemons = [
     types: ['Fire'],
     price: 4.99,
     countInStock: 2,
-    rating: 4.6,
-    numReviews: 5,
+    rating: 1.7,
+    numReviews: 0,
   },
   {
     _id: '6',
@@ -68,8 +68,8 @@ const pokemons = [
     types: ['Fire', 'Flying'],
     price: 7.99,
     countInStock: 1,
-    rating: 4.4,
-    numReviews: 5,
+    rating: 4.8,
+    numReviews: 25,
   },
   {
     _id: '7',
@@ -80,8 +80,8 @@ const pokemons = [
     types: ['Water'],
     price: 2.99,
     countInStock: 3,
-    rating: 4.8,
-    numReviews: 5,
+    rating: 4.6,
+    numReviews: 21,
   },
   {
     _id: '8',
@@ -92,8 +92,8 @@ const pokemons = [
     types: ['Water'],
     price: 4.99,
     countInStock: 2,
-    rating: 4.6,
-    numReviews: 5,
+    rating: 3.9,
+    numReviews: 8,
   },
   {
     _id: '9',
@@ -105,7 +105,7 @@ const pokemons = [
     price: 7.99,
     countInStock: 1,
     rating: 4.4,
-    numReviews: 5,
+    numReviews: 15,
   },
 ];
 

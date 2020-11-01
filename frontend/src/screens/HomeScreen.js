@@ -8,7 +8,7 @@ const HomeScreen = () => {
     <>
       <Row>
         {pokemons.map((pokemon) => (
-          <Col sm={12} md={6} lg={4} xl={3}>
+          <Col key={pokemon._id} sm={12} md={6} lg={4} xl={3}>
             <Pokemon pokemon={pokemon} />
           </Col>
         ))}
