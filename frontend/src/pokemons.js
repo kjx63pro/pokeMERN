@@ -103,7 +103,7 @@ const pokemons = [
       'It crushes its foe under its heavy body to cause fainting. In a pinch, it will withdraw inside its shell.',
     types: ['Water'],
     price: 7.99,
-    countInStock: 1,
+    countInStock: 0,
     rating: 4.4,
     numReviews: 15,
   },

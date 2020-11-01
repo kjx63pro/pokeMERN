@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer>
       <Container>
-        <Col className='text-center'>Copyright &copy; proMERN</Col>
+        <Col className='text-center'>Copyright &copy; PokeSHOP</Col>
       </Container>
     </footer>
   );

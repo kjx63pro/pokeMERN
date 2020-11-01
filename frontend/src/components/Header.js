@@ -8,7 +8,7 @@ const Header = () => {
       <Navbar bg='success' variant='dark' expand='lg'>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>PokeMERN</Navbar.Brand>
+            <Navbar.Brand>PokeSHOP</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
