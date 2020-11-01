@@ -13,7 +13,7 @@ const PokemonScreen = ({ match }) => {
       setPokemon(data);
     }
     fetchData();
-  }, []);
+  }, [match]);
 
   return (
     <>
