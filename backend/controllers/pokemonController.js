@@ -17,7 +17,8 @@ const getPokemonById = asyncHandler(async (req, res) => {
   if (pokemon) {
     res.json(pokemon);
   } else {
-    res.status(404).json({ message: 'Pokemon not found' });
+    res.status(404);
+    throw new Error('Pokemon not found');
   }
 });
 
