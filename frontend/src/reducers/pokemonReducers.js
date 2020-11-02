@@ -5,6 +5,7 @@ import {
   POKEMON_DETAILS_REQUEST,
   POKEMON_DETAILS_SUCCESS,
   POKEMON_DETAILS_FAIL,
+  POKEMON_DETAILS_RESET,
 } from '../constants/pokemonConstants';
 
 export const pokemonListReducer = (state = { pokemons: [] }, action) => {
@@ -31,6 +32,8 @@ export const pokemonDetailsReducer = (
       return { loading: false, pokemon: action.payload };
     case POKEMON_DETAILS_FAIL:
       return { loading: false, error: action.payload };
+    case POKEMON_DETAILS_RESET:
+      return {};
     default:
       return state;
   }

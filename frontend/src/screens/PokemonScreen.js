@@ -1,13 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  Image,
+  ListGroup,
+  Card,
+  Button,
+  Form,
+} from 'react-bootstrap';
 import Rating from '../components/Rating';
 import { listPokemonDetails } from '../actions/pokemonActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import { POKEMON_DETAILS_RESET } from '../constants/pokemonConstants';
 
-const PokemonScreen = ({ match }) => {
+const PokemonScreen = ({ history, match }) => {
+  const [qty, setQty] = useState(0);
   const dispatch = useDispatch();
 
   const pokemonDetails = useSelector((state) => state.pokemonDetails);
@@ -15,8 +25,13 @@ const PokemonScreen = ({ match }) => {
   const { loading, error, pokemon } = pokemonDetails;
 
   useEffect(() => {
+    dispatch({ type: POKEMON_DETAILS_RESET });
     dispatch(listPokemonDetails(match.params.id));
   }, [dispatch, match]);
+
+  const addToCartHandler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
 
   return (
     <>
@@ -68,8 +83,38 @@ const PokemonScreen = ({ match }) => {
                     </Col>
                   </Row>
                 </ListGroup.Item>
+                {pokemon.countInStock > 0 && (
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Qty:</Col>
+                      <Col>
+                        <Form>
+                          <Form.Group>
+                            <Form.Control
+                              as='select'
+                              value={qty}
+                              onChange={(e) => {
+                                setQty(e.target.value);
+                              }}
+                            >
+                              {[...Array(pokemon.countInStock).keys()].map(
+                                (x) => (
+                                  <option key={x + 1} value={x + 1}>
+                                    {x + 1}
+                                  </option>
+                                )
+                              )}
+                            </Form.Control>
+                          </Form.Group>
+                        </Form>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                )}
+
                 <ListGroup.Item>
                   <Button
+                    onClick={addToCartHandler}
                     className='btn-block'
                     type='button'
                     variant='success'
