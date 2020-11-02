@@ -2,7 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
 import connectDB from './config/db.js';
-import pokemons from './data/pokemons.js';
+
+import pokemonRoutes from './routes/pokemonRoutes.js';
 
 dotenv.config();
 
@@ -14,14 +15,7 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
-app.get('/api/pokemons', (req, res) => {
-  res.json(pokemons);
-});
-
-app.get('/api/pokemons/:id', (req, res) => {
-  const pokemon = pokemons.find((p) => p._id === req.params.id);
-  res.json(pokemon);
-});
+app.use('/api/pokemons', pokemonRoutes);
 
 const PORT = process.env.PORT || 5000;
 
