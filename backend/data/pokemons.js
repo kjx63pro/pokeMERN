@@ -1,6 +1,5 @@
 const pokemons = [
   {
-    _id: '1',
     name: 'Bulbasaur',
     image: '/images/Bulbasaur.png',
     description:
@@ -12,7 +11,6 @@ const pokemons = [
     numReviews: 12,
   },
   {
-    _id: '2',
     name: 'Ivysaur',
     image: '/images/Ivysaur.png',
     description:
@@ -24,7 +22,6 @@ const pokemons = [
     numReviews: 8,
   },
   {
-    _id: '3',
     name: 'Venusaur',
     image: '/images/Venusaur.png',
     description:
@@ -36,7 +33,6 @@ const pokemons = [
     numReviews: 9,
   },
   {
-    _id: '4',
     name: 'Charmander',
     image: '/images/Charmander.png',
     description:
@@ -48,7 +44,6 @@ const pokemons = [
     numReviews: 14,
   },
   {
-    _id: '5',
     name: 'Charmeleon',
     image: '/images/Charmeleon.png',
     description:
@@ -60,7 +55,6 @@ const pokemons = [
     numReviews: 0,
   },
   {
-    _id: '6',
     name: 'Charizard',
     image: '/images/Charizard.png',
     description:
@@ -72,7 +66,6 @@ const pokemons = [
     numReviews: 25,
   },
   {
-    _id: '7',
     name: 'Squirtle',
     image: '/images/Squirtle.png',
     description:
@@ -84,7 +77,6 @@ const pokemons = [
     numReviews: 21,
   },
   {
-    _id: '8',
     name: 'Wartortle',
     image: '/images/Wartortle.png',
     description:
@@ -96,7 +88,6 @@ const pokemons = [
     numReviews: 8,
   },
   {
-    _id: '9',
     name: 'Blastoise',
     image: '/images/Blastoise.png',
     description:
