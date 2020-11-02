@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import Pokemon from '../components/Pokemon';
+import { listPokemons } from '../actions/pokemonActions';
 
 const HomeScreen = () => {
-  const [pokemons, setPokemons] = useState([]);
+  const dispatch = useDispatch();
+
+  const pokemonList = useSelector((state) => state.pokemonList);
+
+  const { pokemons, loading, error } = pokemonList;
+
   useEffect(() => {
-    async function fetchData() {
-      const { data } = await axios.get('/api/pokemons');
-      setPokemons(data);
-    }
-    fetchData();
-  }, []);
+    dispatch(listPokemons());
+  }, [dispatch]);
 
   return (
     <>
