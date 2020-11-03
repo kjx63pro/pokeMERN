@@ -17,7 +17,7 @@ import Message from '../components/Message';
 import { POKEMON_DETAILS_RESET } from '../constants/pokemonConstants';
 
 const PokemonScreen = ({ history, match }) => {
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
 
   const pokemonDetails = useSelector((state) => state.pokemonDetails);
