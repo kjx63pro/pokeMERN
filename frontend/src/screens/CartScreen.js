@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 import {
   Row,
   Col,
@@ -28,7 +28,10 @@ const CartScreen = ({ match, location, history }) => {
     }
   }, [dispatch, pokemonId, qty]);
 
-  const removeFromCartHandler = (id) => {};
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+  };
+
   const checkoutHandler = (id) => {
     // if logged in, go to /shipping, else go to /login
     history.push('/login?redirect=shipping');
