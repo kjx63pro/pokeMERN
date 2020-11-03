@@ -12,7 +12,7 @@ const Pokemon = ({ pokemon }) => {
 
       <Card.Body>
         <Link to={`/pokemon/${pokemon._id}`}>
-          <Card.Title as='div' style={{ color: 'black' }}>
+          <Card.Title as='div'>
             <strong>{pokemon.name}</strong>
           </Card.Title>
         </Link>

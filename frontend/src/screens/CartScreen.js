@@ -65,7 +65,7 @@ const CartScreen = ({ match, location, history }) => {
                       }
                     >
                       {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
+                        <option key={x + 1} value={x + 1} className='option'>
                           {x + 1}
                         </option>
                       ))}
