@@ -51,7 +51,9 @@ const CartScreen = ({ match, location, history }) => {
               <ListGroup.Item key={item.pokemon}>
                 <Row>
                   <Col md={2}>
-                    <Image src={item.image} alt={item.name} fluid rounded />
+                    <Link to={`/pokemon/${item.pokemon}`}>
+                      <Image src={item.image} alt={item.name} fluid rounded />
+                    </Link>
                   </Col>
                   <Col md={3}>
                     <Link to={`/pokemon/${item.pokemon}`}>{item.name}</Link>
