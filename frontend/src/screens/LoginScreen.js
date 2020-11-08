@@ -22,8 +22,14 @@ const LoginScreen = ({ location, history }) => {
   useEffect(() => {
     if (userInfo) {
       history.push(redirect);
+    } else if (error) {
+      setEmail(email);
+      setPassword(password);
+      setTimeout(() => {
+        dispatch();
+      }, 4000);
     }
-  }, [userInfo, history, redirect]);
+  }, [dispatch, userInfo, history, redirect, error, email, password]);
 
   const submitHandler = (e) => {
     e.preventDefault();

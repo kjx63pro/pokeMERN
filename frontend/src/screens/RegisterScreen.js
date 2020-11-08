@@ -6,6 +6,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { register } from '../actions/userActions.js';
+import { DELETE_ALERT } from '../constants/userConstants';
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -25,14 +26,35 @@ const RegisterScreen = ({ location, history }) => {
   useEffect(() => {
     if (userInfo) {
       history.push(redirect);
+    } else if (error) {
+      setName(name);
+      setEmail(email);
+      setPassword(password);
+      setConfirmPassword(confirmPassword);
+      setTimeout(() => {
+        dispatch({ type: DELETE_ALERT });
+      }, 4000);
     }
-  }, [userInfo, history, redirect]);
+  }, [
+    dispatch,
+    userInfo,
+    history,
+    redirect,
+    error,
+    name,
+    email,
+    password,
+    confirmPassword,
+  ]);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
       setMessage('Password do not match');
+      setTimeout(() => {
+        setMessage('');
+      }, 4000);
     } else {
       dispatch(register(name, email, password));
     }
