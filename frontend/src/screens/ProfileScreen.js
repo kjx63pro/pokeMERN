@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message.js';
 import Loader from '../components/Loader.js';
 import { getUserDetails, updateUserProfile } from '../actions/userActions.js';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants.js';
 
 const ProfileScreen = ({ history }) => {
   const [name, setName] = useState('');
@@ -29,12 +30,17 @@ const ProfileScreen = ({ history }) => {
     } else {
       if (!user || !user.name) {
         dispatch(getUserDetails('profile'));
+      } else if (success) {
+        setTimeout(() => {
+          dispatch({ type: USER_UPDATE_PROFILE_RESET });
+          dispatch(getUserDetails('profile'));
+        }, 4000);
       } else {
         setName(user.name);
         setEmail(user.email);
       }
     }
-  }, [dispatch, history, userInfo, user]);
+  }, [dispatch, history, userInfo, user, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
