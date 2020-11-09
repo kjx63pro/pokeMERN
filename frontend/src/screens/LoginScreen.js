@@ -6,6 +6,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { login } from '../actions/userActions.js';
+import { USER_LOGOUT } from '../constants/userConstants';
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ const LoginScreen = ({ location, history }) => {
       setEmail(email);
       setPassword(password);
       setTimeout(() => {
-        dispatch();
+        dispatch({ type: USER_LOGOUT });
       }, 4000);
     }
   }, [dispatch, userInfo, history, redirect, error, email, password]);
