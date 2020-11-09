@@ -13,6 +13,9 @@ const HomeScreen = () => {
 
   const { pokemons, loading, error } = pokemonList;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {
     dispatch(listPokemons());
   }, [dispatch]);
@@ -24,13 +27,18 @@ const HomeScreen = () => {
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <Row>
-          {pokemons.map((pokemon) => (
-            <Col key={pokemon._id} sm={12} md={6} lg={4} xl={3}>
-              <Pokemon pokemon={pokemon} />
-            </Col>
-          ))}
-        </Row>
+        <>
+          {userInfo && (
+            <Message variant='warning'>Welcome Back {userInfo.name} !</Message>
+          )}
+          <Row>
+            {pokemons.map((pokemon) => (
+              <Col key={pokemon._id} sm={12} md={6} lg={4} xl={3}>
+                <Pokemon pokemon={pokemon} />
+              </Col>
+            ))}
+          </Row>
+        </>
       )}
     </>
   );
