@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button } from 'react-bootstrap';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { listUsers } from '../actions/userActions';
+import { listUsers, deleteUser } from '../actions/userActions';
 
 const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -15,7 +15,8 @@ const UserListScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const userDeleteHandler = (id) => {};
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -23,7 +24,18 @@ const UserListScreen = ({ history }) => {
     } else {
       history.push('/login');
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo, successDelete]);
+
+  const userDeleteHandler = (user) => {
+    if (user.isAdmin) {
+      alert('You can not delete admin user from here');
+    } else if (
+      window.confirm(`Are you sure you want to delete ${user.name}?`)
+    ) {
+      dispatch(deleteUser(user._id));
+    }
+  };
+
   return (
     <>
       <h1>USERS</h1>
@@ -66,7 +78,9 @@ const UserListScreen = ({ history }) => {
                   <Button
                     size='sm'
                     variant='danger'
-                    onClick={userDeleteHandler(user._id)}
+                    onClick={() => {
+                      userDeleteHandler(user);
+                    }}
                   >
                     <i className='fas fa-trash' />
                   </Button>
