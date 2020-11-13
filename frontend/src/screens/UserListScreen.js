@@ -38,6 +38,7 @@ const UserListScreen = ({ history }) => {
 
   return (
     <>
+      <Message>This is an admin-only page</Message>
       <h1>USERS</h1>
       {loading ? (
         <Loader />

@@ -5,7 +5,7 @@ import asyncHandler from 'express-async-handler';
 // @route   GET /api/pokemons
 // @access  Public
 const getPokemons = asyncHandler(async (req, res) => {
-  const pokemons = await Pokemon.find({});
+  const pokemons = await Pokemon.find({}).populate('user', 'name');
   res.json(pokemons);
 });
 

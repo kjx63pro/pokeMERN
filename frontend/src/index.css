@@ -29,3 +29,7 @@ select.form-control {
 a {
   color: black;
 }
+
+p {
+  font-family: system-ui;
+}
