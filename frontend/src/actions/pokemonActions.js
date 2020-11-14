@@ -11,6 +11,9 @@ import {
   POKEMON_CREATE_REQUEST,
   POKEMON_CREATE_SUCCESS,
   POKEMON_CREATE_FAIL,
+  POKEMON_UPDATE_REQUEST,
+  POKEMON_UPDATE_SUCCESS,
+  POKEMON_UPDATE_FAIL,
 } from '../constants/pokemonConstants';
 import axios from 'axios';
 
@@ -85,6 +88,44 @@ export const createPokemon = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: POKEMON_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updatePokemon = (pokemon) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: POKEMON_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/pokemons/${pokemon._id}`,
+      pokemon,
+      config
+    );
+
+    dispatch({
+      type: POKEMON_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: POKEMON_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

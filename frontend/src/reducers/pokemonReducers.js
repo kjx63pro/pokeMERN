@@ -13,6 +13,10 @@ import {
   POKEMON_CREATE_SUCCESS,
   POKEMON_CREATE_FAIL,
   POKEMON_CREATE_RESET,
+  POKEMON_UPDATE_REQUEST,
+  POKEMON_UPDATE_SUCCESS,
+  POKEMON_UPDATE_FAIL,
+  POKEMON_UPDATE_RESET,
 } from '../constants/pokemonConstants';
 
 export const pokemonListReducer = (state = { pokemons: [] }, action) => {
@@ -55,6 +59,21 @@ export const pokemonCreateReducer = (state = {}, action) => {
     case POKEMON_CREATE_FAIL:
       return { loading: false, error: action.payload };
     case POKEMON_CREATE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const pokemonUpdateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case POKEMON_UPDATE_REQUEST:
+      return { loading: true };
+    case POKEMON_UPDATE_SUCCESS:
+      return { loading: false, success: true, pokemon: action.payload };
+    case POKEMON_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case POKEMON_UPDATE_RESET:
       return {};
     default:
       return state;

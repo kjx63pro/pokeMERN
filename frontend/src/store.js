@@ -5,6 +5,7 @@ import {
   pokemonListReducer,
   pokemonDetailsReducer,
   pokemonCreateReducer,
+  pokemonUpdateReducer,
   pokemonDeleteReducer,
 } from './reducers/pokemonReducers';
 import { cartReducer } from './reducers/cartReducers';
@@ -27,8 +28,9 @@ import {
 const reducer = combineReducers({
   pokemonList: pokemonListReducer,
   pokemonDetails: pokemonDetailsReducer,
-  pokemonDelete: pokemonDeleteReducer,
   pokemonCreate: pokemonCreateReducer,
+  pokemonUpdate: pokemonUpdateReducer,
+  pokemonDelete: pokemonDeleteReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,

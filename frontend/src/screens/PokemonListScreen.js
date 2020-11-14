@@ -11,7 +11,7 @@ import {
 } from '../actions/pokemonActions';
 import { POKEMON_CREATE_RESET } from '../constants/pokemonConstants';
 
-const PokemonListScreen = ({ history, match }) => {
+const PokemonListScreen = ({ history }) => {
   const dispatch = useDispatch();
 
   const pokemonList = useSelector((state) => state.pokemonList);
@@ -36,8 +36,8 @@ const PokemonListScreen = ({ history, match }) => {
   } = pokemonDelete;
 
   useEffect(() => {
+    dispatch({ type: POKEMON_CREATE_RESET });
     if (successCreate) {
-      dispatch({ type: POKEMON_CREATE_RESET });
       history.push(`/admin/pokemon/${pokemon._id}/edit`);
     }
     if (userInfo && userInfo.isAdmin) {

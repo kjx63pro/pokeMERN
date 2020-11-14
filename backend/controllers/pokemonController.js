@@ -50,6 +50,31 @@ const createPokemon = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Update pokemon
+// @route   POST /api/pokemons/:id
+// @access  Private/Admin
+const updatePokemon = asyncHandler(async (req, res) => {
+  const { name, image, types, description, price, countInStock } = req.body;
+
+  const pokemon = await Pokemon.findById(req.params.id);
+
+  if (pokemon) {
+    pokemon.name = name || pokemon.name;
+    pokemon.image = image || pokemon.image;
+    pokemon.types = types || pokemon.types;
+    pokemon.description = description || pokemon.description;
+    pokemon.price = price || pokemon.price;
+    pokemon.countInStock = countInStock || pokemon.countInStock;
+
+    const updatedPokemon = await pokemon.save();
+
+    res.json(updatedPokemon);
+  } else {
+    res.status(404);
+    throw new Error('Pokemon not found');
+  }
+});
+
 // @desc    Delete pokemon
 // @route   DELETE /api/pokemons/:id
 // @access  Private/Admin
@@ -65,4 +90,10 @@ const deletePokemon = asyncHandler(async (req, res) => {
   }
 });
 
-export { getPokemons, getPokemonById, createPokemon, deletePokemon };
+export {
+  getPokemons,
+  getPokemonById,
+  createPokemon,
+  updatePokemon,
+  deletePokemon,
+};
