@@ -22,8 +22,36 @@ const getPokemonById = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Create pokemon
+// @route   POST /api/pokemons
+// @access  Private/Admin
+const createPokemon = asyncHandler(async (req, res) => {
+  const newPokemon = await Pokemon.create({
+    types: [],
+    price: 0,
+    countInStock: 0,
+    rating: 0,
+    numReviews: 0,
+    name: '???',
+    image: '/images/sample.png',
+    description: 'Some description here',
+    user: {
+      _id: req.user._id,
+      name: req.user.name,
+    },
+    reviews: [],
+  });
+
+  if (newPokemon) {
+    res.json(newPokemon);
+  } else {
+    res.status(400);
+    throw new Error('Invalid pokemon data');
+  }
+});
+
 // @desc    Delete pokemon
-// @route   DELETE /api/pokemon/:id
+// @route   DELETE /api/pokemons/:id
 // @access  Private/Admin
 const deletePokemon = asyncHandler(async (req, res) => {
   const pokemon = await Pokemon.findById(req.params.id);
@@ -37,4 +65,4 @@ const deletePokemon = asyncHandler(async (req, res) => {
   }
 });
 
-export { getPokemons, getPokemonById, deletePokemon };
+export { getPokemons, getPokemonById, createPokemon, deletePokemon };

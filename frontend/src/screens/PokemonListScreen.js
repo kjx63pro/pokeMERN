@@ -3,8 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table, Image, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../components/Message';
-import { listPokemons, deletePokemon } from '../actions/pokemonActions';
 import Loader from '../components/Loader';
+import {
+  listPokemons,
+  createPokemon,
+  deletePokemon,
+} from '../actions/pokemonActions';
+import { POKEMON_CREATE_RESET } from '../constants/pokemonConstants';
 
 const PokemonListScreen = ({ history, match }) => {
   const dispatch = useDispatch();
@@ -15,6 +20,14 @@ const PokemonListScreen = ({ history, match }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const pokemonCreate = useSelector((state) => state.pokemonCreate);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    pokemon,
+  } = pokemonCreate;
+
   const pokemonDelete = useSelector((state) => state.pokemonDelete);
   const {
     loading: loadingDelete,
@@ -23,14 +36,20 @@ const PokemonListScreen = ({ history, match }) => {
   } = pokemonDelete;
 
   useEffect(() => {
+    if (successCreate) {
+      dispatch({ type: POKEMON_CREATE_RESET });
+      history.push(`/admin/pokemon/${pokemon._id}/edit`);
+    }
     if (userInfo && userInfo.isAdmin) {
       dispatch(listPokemons());
     } else {
       history.push('/login');
     }
-  }, [dispatch, userInfo, history, successDelete]);
+  }, [dispatch, userInfo, history, successDelete, successCreate, pokemon]);
 
-  const createPokemonHandler = () => {};
+  const createPokemonHandler = () => {
+    dispatch(createPokemon());
+  };
 
   const pokemonDeleteHandler = (pokemon) => {
     if (window.confirm(`Are you sure you want to delete "${pokemon.name}"?`)) {
@@ -53,6 +72,8 @@ const PokemonListScreen = ({ history, match }) => {
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+      {loadingCreate && <Loader />}
+      {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (

@@ -9,6 +9,10 @@ import {
   POKEMON_DELETE_REQUEST,
   POKEMON_DELETE_SUCCESS,
   POKEMON_DELETE_FAIL,
+  POKEMON_CREATE_REQUEST,
+  POKEMON_CREATE_SUCCESS,
+  POKEMON_CREATE_FAIL,
+  POKEMON_CREATE_RESET,
 } from '../constants/pokemonConstants';
 
 export const pokemonListReducer = (state = { pokemons: [] }, action) => {
@@ -36,6 +40,21 @@ export const pokemonDetailsReducer = (
     case POKEMON_DETAILS_FAIL:
       return { loading: false, error: action.payload };
     case POKEMON_DETAILS_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const pokemonCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case POKEMON_CREATE_REQUEST:
+      return { loading: true };
+    case POKEMON_CREATE_SUCCESS:
+      return { loading: false, success: true, pokemon: action.payload };
+    case POKEMON_CREATE_FAIL:
+      return { loading: false, error: action.payload };
+    case POKEMON_CREATE_RESET:
       return {};
     default:
       return state;
