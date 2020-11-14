@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table, Image, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../components/Message';
-import { listPokemons } from '../actions/pokemonActions';
+import { listPokemons, deletePokemon } from '../actions/pokemonActions';
 import Loader from '../components/Loader';
 
 const PokemonListScreen = ({ history, match }) => {
@@ -15,17 +15,28 @@ const PokemonListScreen = ({ history, match }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const pokemonDelete = useSelector((state) => state.pokemonDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = pokemonDelete;
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listPokemons());
     } else {
       history.push('/login');
     }
-  }, [dispatch, userInfo, history]);
+  }, [dispatch, userInfo, history, successDelete]);
 
   const createPokemonHandler = () => {};
 
-  const pokemonDeleteHandler = () => {};
+  const pokemonDeleteHandler = (pokemon) => {
+    if (window.confirm(`Are you sure you want to delete "${pokemon.name}"?`)) {
+      dispatch(deletePokemon(pokemon._id));
+    }
+  };
 
   return (
     <>
@@ -40,7 +51,8 @@ const PokemonListScreen = ({ history, match }) => {
           </Button>
         </Col>
       </Row>
-
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
@@ -87,7 +99,7 @@ const PokemonListScreen = ({ history, match }) => {
                     size='sm'
                     variant='danger'
                     onClick={() => {
-                      pokemonDeleteHandler(pokemon._id);
+                      pokemonDeleteHandler(pokemon);
                     }}
                   >
                     <i className='fas fa-trash' />
