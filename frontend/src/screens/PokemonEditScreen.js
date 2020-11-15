@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -20,6 +21,7 @@ const PokemonEditScreen = ({ match, history }) => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
   const [countInStock, setCountInStock] = useState(0);
+  const [uploading, setUploading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -51,6 +53,30 @@ const PokemonEditScreen = ({ match, history }) => {
     }
   }, [dispatch, pokemonId, successUpdate, history, pokemon]);
 
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+    setUploading(true);
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post('/api/upload', formData, config);
+      console.log(data);
+
+      setImage(data);
+      setUploading(false);
+    } catch (error) {
+      console.error(error);
+      setUploading(false);
+    }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
@@ -65,6 +91,7 @@ const PokemonEditScreen = ({ match, history }) => {
       })
     );
   };
+
   return (
     <>
       <Link to='/admin/pokemonlist' className='btn btn-light my-3'>
@@ -93,10 +120,18 @@ const PokemonEditScreen = ({ match, history }) => {
               <Form.Label>Image</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Enter image'
+                placeholder='Enter image url'
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
+              <Form.File
+                id='image-file'
+                label='Choose File'
+                custom
+                onChange={uploadFileHandler}
+              >
+                {uploading && <Loader />}
+              </Form.File>
             </Form.Group>
             <Form.Group controlId='types'>
               <Form.Label>Types</Form.Label>
