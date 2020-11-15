@@ -35,8 +35,8 @@ const OrderListScreen = ({ history }) => {
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
-      ) : !orders ? (
-        <Message variant='info'>You have not ordered any pokemons yet</Message>
+      ) : orders.length === 0 ? (
+        <Message variant='info'>There is no one ordered pokemons yet.</Message>
       ) : (
         <Table striped bordered hover responsive className='table-sm'>
           <thead>
