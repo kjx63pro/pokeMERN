@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card } from 'react-bootstrap';
+import { Card, Badge } from 'react-bootstrap';
 import Rating from './Rating';
 
 const Pokemon = ({ pokemon }) => {
@@ -16,6 +16,28 @@ const Pokemon = ({ pokemon }) => {
             <strong>{pokemon.name}</strong>
           </Card.Title>
         </Link>
+        <Card.Text>
+          {pokemon.types.map((p) => (
+            <Badge
+              variant={
+                p === 'Grass'
+                  ? 'success'
+                  : p === 'Fire'
+                  ? 'danger'
+                  : p === 'Water'
+                  ? 'primary'
+                  : p === 'Bug'
+                  ? 'dark'
+                  : p === 'Poison'
+                  ? 'info'
+                  : 'light'
+              }
+              className='mr-1'
+            >
+              {p}
+            </Badge>
+          ))}
+        </Card.Text>
         <Card.Text as='div'>
           <div className='my-3'>
             <Rating
