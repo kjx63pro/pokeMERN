@@ -98,6 +98,127 @@ const pokemons = [
     rating: 4.4,
     numReviews: 15,
   },
+  {
+    name: 'Caterpie',
+    image: '/images/Caterpie.png',
+    description:
+      'For protection, it releases a horrible stench from the antenna on its head to drive away enemies.',
+    types: ['Bug'],
+    price: 0.19,
+    countInStock: 20,
+    rating: 1.5,
+    numReviews: 3,
+  },
+  {
+    name: 'Metapod',
+    image: '/images/Metapod.png',
+    description:
+      'It is waiting for the moment to evolve. At this stage, it can only harden, so it remains motionless to avoid attack.',
+    types: ['Bug'],
+    price: 0.29,
+    countInStock: 15,
+    rating: 1.1,
+    numReviews: 1,
+  },
+  {
+    name: 'Butterfree',
+    image: '/images/Butterfree.png',
+    description:
+      'In battle, it flaps its wings at great speed to release highly toxic dust into the air.',
+    types: ['Bug', 'Flying'],
+    price: 1.59,
+    countInStock: 7,
+    rating: 2.9,
+    numReviews: 3,
+  },
+  {
+    name: 'Weedle',
+    image: '/images/Weedle.png',
+    description:
+      'Beware of the sharp stinger on its head. It hides in grass and bushes where it eats leaves.',
+    types: ['Bug', 'Poison'],
+    price: 0.19,
+    countInStock: 20,
+    rating: 1.5,
+    numReviews: 3,
+  },
+  {
+    name: 'Kakuna',
+    image: '/images/Kakuna.png',
+    description:
+      'Able to move only slightly. When endangered, it may stick out its stinger and poison its enemy',
+    types: ['Bug', 'Poison'],
+    price: 0.29,
+    countInStock: 15,
+    rating: 1.1,
+    numReviews: 1,
+  },
+  {
+    name: 'Beedrill',
+    image: '/images/Beedrill.png',
+    description:
+      'It has three poisonous stingers on its forelegs and its tail. They are used to jab its enemy repeatedly',
+    types: ['Bug', 'Poison'],
+    price: 1.59,
+    countInStock: 7,
+    rating: 2.9,
+    numReviews: 3,
+  },
+  {
+    name: 'Pidgey',
+    image: '/images/Pidgey.png',
+    description:
+      'Very docile. If attacked, it will often kick up sand to protect itself rather than fight back.',
+    types: ['Normal', 'Flying'],
+    price: 2.59,
+    countInStock: 10,
+    rating: 2.2,
+    numReviews: 4,
+  },
+  {
+    name: 'Pidgeotto',
+    image: '/images/Pidgeotto.png',
+    description:
+      'This Pokémon is full of vitality. It constantly flies around its large territory in search of prey.',
+    types: ['Normal', 'Flying'],
+    price: 4.99,
+    countInStock: 8,
+    rating: 3.2,
+    numReviews: 10,
+  },
+  {
+    name: 'Pidgeot',
+    image: '/images/Pidgeot.png',
+    description:
+      'This Pokémon flies at Mach 2 speed, seeking prey. Its large talons are feared as wicked weapons.',
+    types: ['Normal', 'Flying'],
+    price: 6.99,
+    countInStock: 2,
+    rating: 3.9,
+    numReviews: 8,
+  },
+  {
+    name: 'Rattata',
+    image: '/images/Rattata.png',
+    description:
+      'Will chew on anything with its fangs. If you see one, you can be certain that 40 more live in the area.',
+    types: ['Normal'],
+    price: 0.09,
+    countInStock: 30,
+    rating: 0.9,
+    numReviews: 21,
+  },
+  {
+    name: 'Raticate',
+    image: '/images/Raticate.png',
+    description:
+      'Its hind feet are webbed. They act as flippers, so it can swim in rivers and hunt for prey.',
+    types: ['Normal'],
+    price: 1.99,
+    countInStock: 6,
+    rating: 1.9,
+    numReviews: 3,
+  },
 ];
 
 export default pokemons;
