@@ -20,13 +20,13 @@ import {
 } from '../constants/pokemonConstants';
 import axios from 'axios';
 
-export const listPokemons = () => async (dispatch) => {
+export const listPokemons = (keyword = '') => async (dispatch) => {
   try {
     dispatch({
       type: POKEMON_LIST_REQUEST,
     });
 
-    const { data } = await axios.get('/api/pokemons');
+    const { data } = await axios.get(`/api/pokemons?keyword=${keyword}`);
 
     dispatch({
       type: POKEMON_LIST_SUCCESS,

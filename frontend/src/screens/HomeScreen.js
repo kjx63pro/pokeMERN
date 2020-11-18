@@ -6,7 +6,9 @@ import { listPokemons } from '../actions/pokemonActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 
-const HomeScreen = () => {
+const HomeScreen = ({ match }) => {
+  const keyword = match.params.keyword;
+
   const dispatch = useDispatch();
 
   const pokemonList = useSelector((state) => state.pokemonList);
@@ -17,8 +19,8 @@ const HomeScreen = () => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    dispatch(listPokemons());
-  }, [dispatch]);
+    dispatch(listPokemons(keyword));
+  }, [dispatch, keyword]);
 
   return (
     <>

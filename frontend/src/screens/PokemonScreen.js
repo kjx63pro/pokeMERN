@@ -88,6 +88,7 @@ const PokemonScreen = ({ history, match }) => {
                 <ListGroup.Item>
                   <h3>{pokemon.name}</h3>
                 </ListGroup.Item>
+
                 <ListGroup.Item>
                   <Rating
                     value={pokemon.rating}
