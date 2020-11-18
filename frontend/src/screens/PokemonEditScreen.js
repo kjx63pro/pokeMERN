@@ -11,6 +11,7 @@ import {
   updatePokemon,
 } from '../actions/pokemonActions.js';
 import { POKEMON_UPDATE_RESET } from '../constants/pokemonConstants';
+import Meta from '../components/Meta';
 
 const PokemonEditScreen = ({ match, history }) => {
   const pokemonId = match.params.id;
@@ -94,11 +95,12 @@ const PokemonEditScreen = ({ match, history }) => {
 
   return (
     <>
+      <Meta title={`Edit ${pokemon.name} | Admin Only`} />
       <Link to='/admin/pokemonlist' className='btn btn-light my-3'>
         Go Back
       </Link>
       <FormContainer>
-        <h1>Edit User</h1>
+        <h1>Edit Pokemon</h1>
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (

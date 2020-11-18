@@ -10,6 +10,7 @@ import {
   deletePokemon,
 } from '../actions/pokemonActions';
 import { POKEMON_CREATE_RESET } from '../constants/pokemonConstants';
+import Meta from '../components/Meta';
 
 const PokemonListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ const PokemonListScreen = ({ history }) => {
 
   return (
     <>
+      <Meta title='Pokemon List | Admin Only' />
       <Message>This is an admin-only page</Message>
       <Row>
         <Col>

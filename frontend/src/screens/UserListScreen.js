@@ -5,6 +5,7 @@ import { Table, Button } from 'react-bootstrap';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listUsers, deleteUser } from '../actions/userActions';
+import Meta from '../components/Meta';
 
 const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const UserListScreen = ({ history }) => {
 
   return (
     <>
+      <Meta title='User List | Admin Only' />
       <Message>This is an admin-only page</Message>
       <h1>USERS</h1>
       {loading ? (

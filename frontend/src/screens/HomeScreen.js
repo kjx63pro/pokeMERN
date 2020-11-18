@@ -5,6 +5,7 @@ import Pokemon from '../components/Pokemon';
 import { listPokemons } from '../actions/pokemonActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Meta from '../components/Meta';
 
 const HomeScreen = ({ match }) => {
   const keyword = match.params.keyword;
@@ -24,6 +25,7 @@ const HomeScreen = ({ match }) => {
 
   return (
     <>
+      <Meta />
       {loading ? (
         <Loader />
       ) : error ? (

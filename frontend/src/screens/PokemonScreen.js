@@ -21,6 +21,7 @@ import {
   POKEMON_CREATE_REVIEW_RESET,
   POKEMON_DETAILS_RESET,
 } from '../constants/pokemonConstants';
+import Meta from '../components/Meta';
 
 const PokemonScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
@@ -78,7 +79,7 @@ const PokemonScreen = ({ history, match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          {' '}
+          <Meta title={pokemon.name} />
           <Row>
             <Col md={6}>
               <Image src={pokemon.image} alt={pokemon.name} fluid />
