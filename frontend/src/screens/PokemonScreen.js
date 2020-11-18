@@ -20,7 +20,6 @@ import Message from '../components/Message';
 import {
   POKEMON_CREATE_REVIEW_RESET,
   POKEMON_DETAILS_RESET,
-  POKEMON_DETAILS_SUCCESS,
 } from '../constants/pokemonConstants';
 
 const PokemonScreen = ({ history, match }) => {
@@ -47,8 +46,7 @@ const PokemonScreen = ({ history, match }) => {
       setRating(0);
       setComment('');
       dispatch(listPokemonDetails(match.params.id));
-    }
-    if (!pokemon._id || pokemon._id !== match.params.id) {
+    } else {
       dispatch({ type: POKEMON_DETAILS_RESET });
       dispatch({ type: POKEMON_CREATE_REVIEW_RESET });
       dispatch(listPokemonDetails(match.params.id));

@@ -29,6 +29,7 @@ import {
   ORDER_LIST_MY_RESET,
   ORDER_DETAILS_RESET,
 } from '../constants/orderConstants';
+import { POKEMON_CREATE_REVIEW_RESET } from '../constants/pokemonConstants';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -72,6 +73,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: ORDER_LIST_MY_RESET });
   dispatch({ type: ORDER_DETAILS_RESET });
   dispatch({ type: USER_LIST_RESET });
+  dispatch({ type: POKEMON_CREATE_REVIEW_RESET });
 };
 
 export const register = (name, email, password) => async (dispatch) => {
