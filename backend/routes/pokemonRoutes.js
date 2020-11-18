@@ -6,6 +6,7 @@ import {
   createPokemon,
   deletePokemon,
   updatePokemon,
+  createPokemonReview,
 } from '../controllers/pokemonController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
@@ -15,5 +16,7 @@ router
   .get(getPokemonById)
   .delete(protect, admin, deletePokemon)
   .put(protect, admin, updatePokemon);
+
+router.route('/:id/reviews').post(protect, createPokemonReview);
 
 export default router;

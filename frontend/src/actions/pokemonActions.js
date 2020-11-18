@@ -14,6 +14,9 @@ import {
   POKEMON_UPDATE_REQUEST,
   POKEMON_UPDATE_SUCCESS,
   POKEMON_UPDATE_FAIL,
+  POKEMON_CREATE_REVIEW_REQUEST,
+  POKEMON_CREATE_REVIEW_SUCCESS,
+  POKEMON_CREATE_REVIEW_FAIL,
 } from '../constants/pokemonConstants';
 import axios from 'axios';
 
@@ -159,6 +162,42 @@ export const deletePokemon = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: POKEMON_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const createPokemonReview = (pokemonId, review) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: POKEMON_CREATE_REVIEW_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    await axios.post(`/api/pokemons/${pokemonId}/reviews`, review, config);
+
+    dispatch({
+      type: POKEMON_CREATE_REVIEW_SUCCESS,
+    });
+  } catch (error) {
+    dispatch({
+      type: POKEMON_CREATE_REVIEW_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

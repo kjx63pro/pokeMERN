@@ -90,10 +90,51 @@ const deletePokemon = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Create new review
+// @route   POST /api/pokemons/:id/reviews
+// @access  Private
+const createPokemonReview = asyncHandler(async (req, res) => {
+  const { rating, comment } = req.body;
+
+  const pokemon = await Pokemon.findById(req.params.id);
+
+  if (pokemon) {
+    const isAreadyReviewed = pokemon.reviews.find(
+      (review) => review.user.toString() === req.user._id.toString()
+    );
+
+    if (isAreadyReviewed) {
+      res.status(400);
+      throw new Error('You have already reviewed this pokemon');
+    } else {
+      const review = {
+        user: req.user._id,
+        name: req.user.name,
+        rating: Number(rating),
+        comment,
+      };
+      pokemon.reviews.push(review);
+
+      pokemon.numReviews = pokemon.reviews.length;
+
+      pokemon.rating =
+        pokemon.reviews.reduce((acc, item) => item.rating + acc, 0) /
+        pokemon.reviews.length;
+
+      await pokemon.save();
+      res.status(201).json({ message: 'Review added' });
+    }
+  } else {
+    res.status(400);
+    throw new Error('Pokemon not found');
+  }
+});
+
 export {
   getPokemons,
   getPokemonById,
   createPokemon,
   updatePokemon,
   deletePokemon,
+  createPokemonReview,
 };

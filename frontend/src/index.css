@@ -20,12 +20,6 @@ h2 {
   margin: 0.1rem;
 }
 
-select.form-control {
-  padding: 0.5rem 0;
-  height: auto;
-  width: 3rem;
-}
-
 a {
   color: black;
 }
