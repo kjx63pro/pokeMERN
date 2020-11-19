@@ -171,7 +171,13 @@ const PokemonScreen = ({ history, match }) => {
               {pokemon.reviews.length === 0 && <Message>No Reviews</Message>}
               <ListGroup variant='flush'>
                 {pokemon.reviews.map((review) => (
-                  <ListGroup.Item key={review._id}>
+                  <ListGroup.Item
+                    key={review._id}
+                    style={{
+                      backgroundColor:
+                        userInfo?._id === review.user && '#e3fde4',
+                    }}
+                  >
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
                     <p>{review.createdAt.substring(0, 10)}</p>
