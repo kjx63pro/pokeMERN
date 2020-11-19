@@ -21,6 +21,7 @@ import Message from '../components/Message';
 import {
   POKEMON_CREATE_REVIEW_RESET,
   POKEMON_DELETE_REVIEW_RESET,
+  POKEMON_DETAILS_RESET,
 } from '../constants/pokemonConstants';
 import Meta from '../components/Meta';
 
@@ -51,6 +52,7 @@ const PokemonScreen = ({ history, match }) => {
   } = pokemonReviewDelete;
 
   useEffect(() => {
+    dispatch({ type: POKEMON_DETAILS_RESET });
     if (successPokemonReviewDelete) {
       dispatch(listPokemonDetails(match.params.id));
       setTimeout(() => {
