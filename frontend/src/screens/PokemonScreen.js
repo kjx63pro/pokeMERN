@@ -14,12 +14,13 @@ import Rating from '../components/Rating';
 import {
   listPokemonDetails,
   createPokemonReview,
+  deletePokemonReview,
 } from '../actions/pokemonActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import {
   POKEMON_CREATE_REVIEW_RESET,
-  POKEMON_DETAILS_RESET,
+  POKEMON_DELETE_REVIEW_RESET,
 } from '../constants/pokemonConstants';
 import Meta from '../components/Meta';
 
@@ -37,22 +38,35 @@ const PokemonScreen = ({ history, match }) => {
 
   const pokemonReviewCreate = useSelector((state) => state.pokemonReviewCreate);
   const {
-    loading: loadingPokemonReview,
-    error: errorPokemonReview,
-    success: successPokemonReview,
+    loading: loadingPokemonReviewCreate,
+    error: errorPokemonReviewCreate,
+    success: successPokemonReviewCreate,
   } = pokemonReviewCreate;
 
+  const pokemonReviewDelete = useSelector((state) => state.pokemonReviewDelete);
+  const {
+    loading: loadingPokemonReviewDelete,
+    error: errorPokemonReviewDelete,
+    success: successPokemonReviewDelete,
+  } = pokemonReviewDelete;
+
   useEffect(() => {
-    if (successPokemonReview) {
+    if (successPokemonReviewDelete) {
+      dispatch(listPokemonDetails(match.params.id));
+      setTimeout(() => {
+        dispatch({ type: POKEMON_DELETE_REVIEW_RESET });
+      }, 3000);
+    } else if (successPokemonReviewCreate) {
       setRating(0);
       setComment('');
       dispatch(listPokemonDetails(match.params.id));
+      setTimeout(() => {
+        dispatch({ type: POKEMON_CREATE_REVIEW_RESET });
+      }, 3000);
     } else {
-      dispatch({ type: POKEMON_DETAILS_RESET });
-      dispatch({ type: POKEMON_CREATE_REVIEW_RESET });
       dispatch(listPokemonDetails(match.params.id));
     }
-  }, [dispatch, match, successPokemonReview]);
+  }, [dispatch, match, successPokemonReviewCreate, successPokemonReviewDelete]);
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
@@ -66,6 +80,13 @@ const PokemonScreen = ({ history, match }) => {
         comment,
       })
     );
+  };
+
+  const deleteHandler = (reviewId) => {
+    console.log(reviewId);
+    if (window.confirm(`Are you sure you want to delete your review?`)) {
+      dispatch(deletePokemonReview(match.params.id, reviewId));
+    }
   };
 
   return (
@@ -168,7 +189,14 @@ const PokemonScreen = ({ history, match }) => {
           <Row>
             <Col md={6}>
               <h2>Reviews</h2>
+              {successPokemonReviewDelete && (
+                <Message variant='success'>Review deleted successfully</Message>
+              )}
               {pokemon.reviews.length === 0 && <Message>No Reviews</Message>}
+              {loadingPokemonReviewDelete && <Loader />}
+              {errorPokemonReviewDelete && (
+                <Message variant='danger'>{errorPokemonReviewDelete}</Message>
+              )}
               <ListGroup variant='flush'>
                 {pokemon.reviews.map((review) => (
                   <ListGroup.Item
@@ -182,18 +210,31 @@ const PokemonScreen = ({ history, match }) => {
                     <Rating value={review.rating} />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>
+                    {userInfo?._id === review.user && (
+                      <Button
+                        variant='success'
+                        className='btn btn-sm'
+                        onClick={() => {
+                          deleteHandler(review._id);
+                        }}
+                      >
+                        <i className='fas fa-trash'></i> Delete
+                      </Button>
+                    )}
                   </ListGroup.Item>
                 ))}
                 <ListGroup.Item>
                   <h2>Write a Customer Review</h2>
-                  {successPokemonReview && (
+                  {successPokemonReviewCreate && (
                     <Message variant='success'>
                       Review submitted successfully
                     </Message>
                   )}
-                  {loadingPokemonReview && <Loader />}
-                  {errorPokemonReview && (
-                    <Message variant='danger'>{errorPokemonReview}</Message>
+                  {loadingPokemonReviewCreate && <Loader />}
+                  {errorPokemonReviewCreate && (
+                    <Message variant='danger'>
+                      {errorPokemonReviewCreate}
+                    </Message>
                   )}
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
@@ -222,7 +263,7 @@ const PokemonScreen = ({ history, match }) => {
                         ></Form.Control>
                       </Form.Group>
                       <Button
-                        disabled={loadingPokemonReview}
+                        disabled={loadingPokemonReviewCreate}
                         type='submit'
                         variant='primary'
                       >

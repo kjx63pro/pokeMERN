@@ -21,6 +21,10 @@ import {
   POKEMON_CREATE_REVIEW_SUCCESS,
   POKEMON_CREATE_REVIEW_FAIL,
   POKEMON_CREATE_REVIEW_RESET,
+  POKEMON_DELETE_REVIEW_REQUEST,
+  POKEMON_DELETE_REVIEW_SUCCESS,
+  POKEMON_DELETE_REVIEW_FAIL,
+  POKEMON_DELETE_REVIEW_RESET,
 } from '../constants/pokemonConstants';
 
 export const pokemonListReducer = (state = { pokemons: [] }, action) => {
@@ -106,6 +110,21 @@ export const pokemonReviewCreateReducer = (state = {}, action) => {
     case POKEMON_CREATE_REVIEW_FAIL:
       return { loading: false, error: action.payload };
     case POKEMON_CREATE_REVIEW_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const pokemonReviewDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case POKEMON_DELETE_REVIEW_REQUEST:
+      return { loading: true };
+    case POKEMON_DELETE_REVIEW_SUCCESS:
+      return { loading: false, success: true };
+    case POKEMON_DELETE_REVIEW_FAIL:
+      return { loading: false, error: action.payload };
+    case POKEMON_DELETE_REVIEW_RESET:
       return {};
     default:
       return state;

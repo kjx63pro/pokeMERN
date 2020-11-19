@@ -14,8 +14,6 @@ const getPokemons = asyncHandler(async (req, res) => {
       }
     : {};
 
-  console.log(keyword);
-
   const pokemons = await Pokemon.find({ ...keyword }).populate('user', 'name');
   res.json(pokemons);
 });
@@ -141,6 +139,31 @@ const createPokemonReview = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Delete new review
+// @route   DELETE /api/pokemons/:id/reviews/:reviewId
+// @access  Private
+const deletePokemonReview = asyncHandler(async (req, res) => {
+  const pokemon = await Pokemon.findById(req.params.id);
+
+  if (pokemon) {
+    const review = pokemon.reviews.find(
+      (r) => r._id.toString() === req.params.reviewId.toString()
+    );
+
+    if (req.user._id.toString() === review.user.toString()) {
+      await review.remove();
+      await pokemon.save();
+      res.json({ message: 'Review successfully Deleted' });
+    } else {
+      res.status(500);
+      throw new Error('This is not your review');
+    }
+  } else {
+    res.status(400);
+    throw new Error('Pokemon not found');
+  }
+});
+
 export {
   getPokemons,
   getPokemonById,
@@ -148,4 +171,5 @@ export {
   updatePokemon,
   deletePokemon,
   createPokemonReview,
+  deletePokemonReview,
 };

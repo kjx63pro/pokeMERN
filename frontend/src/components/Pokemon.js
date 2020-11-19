@@ -17,8 +17,9 @@ const Pokemon = ({ pokemon }) => {
           </Card.Title>
         </Link>
         <Card.Text>
-          {pokemon.types.map((p) => (
+          {pokemon.types.map((p, index) => (
             <Badge
+              key={index}
               variant={
                 p === 'Grass'
                   ? 'success'
